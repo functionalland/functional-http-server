@@ -9,7 +9,7 @@ function that takes a `Request` and return a `Task` of a `Response`.
 ```js
 import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
 import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
-import startHTTPServer from "./library/server.js";
+import startHTTPServer from "https://deno.land/x/functional_http_server@v0.1.0/library/server.js";
 
 startHTTPServer({ port: 8080 }, request => Task.of(Response.OK({}, request.raw)));
 ```
@@ -35,9 +35,9 @@ must return a `Task` of a `Response`.
 
 ```js
 import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
+import { encodeText } from "https://deno.land/x/functional@v1.1.0/library/utilities.js";
 import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
-import { route } from "./library/route.js";
-import { encodeText } from "./library/utilities.js";
+import { route } from "https://deno.land/x/functional_http_server@v0.1.0/library/route.js";
 
 startHTTPServer(
   { port: 8080 },
@@ -57,9 +57,9 @@ the assertion function. Each handler takes a `String` or a `RegExp` and a unary 
 
 ```js
 import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
+import { encodeText } from "https://deno.land/x/functional@v1.1.0/library/utilities.js";
 import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
-import { handlers, route } from "./library/route.js";
-import { encodeText } from "./library/utilities.js";
+import { handlers, route } from "https://deno.land/x/functional_http_server@v0.1.0/library/route.js";
 
 startHTTPServer(
   { port: 8080 },
@@ -78,7 +78,7 @@ The binary function handler will be called with an object containing the origina
 and other parameters; the second argument is the body of request serialized based on the content type.
 
 ```js
-import { explodeRequest } from "./library/utilities.js";
+import { explodeRequest } from "https://deno.land/x/functional_http_server@v0.1.0/library/utilities.js";
 
 startHTTPServer(
   { port: 8080 },
