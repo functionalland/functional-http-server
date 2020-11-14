@@ -76,7 +76,7 @@ import { assertIsRegex } from "https://deno.land/x/functional@v1.1.0/library/uti
  * startHTTPServer(
  *   { port: 8080 },
  *   route(
- *     handlers.get('/users', explodeRequest(({ filters }) => retrieveUsers(filters))),
+ *     handlers.get('/users', explodeRequest(({ status }) => retrieveUsers({ filters: { status } }))),
  *     handlers.post(/\/users\/(?<userID>.+)$/, explodeRequest(({ userID }, { data: user }) => updateUser(userID, user)))
  *   )
  * );
@@ -85,7 +85,7 @@ import { assertIsRegex } from "https://deno.land/x/functional@v1.1.0/library/uti
  * For this sample, a `GET` request made with a query string will be parsed as an object.
  *
  * ```bash
- * $ curl localhost:8080/users?filters[status]=active
+ * $ curl localhost:8080/users?status=active
  * ```
  *
  * And, a `POST` request with a body as JSON will be parsed as well.
@@ -108,15 +108,13 @@ import { assertIsRegex } from "https://deno.land/x/functional@v1.1.0/library/uti
  * startHTTPServer({ port: 8080 }, route(...userRoutes, ...sensorRoutes));
  * ```
  *
- * ### middleware
+ * ### Middleware
  *
- * This library doesn't come with a special function to create middleware or anything; but that doesn't mean you can't
- * do it with some function composition.
+ * Before talking about middlewares, I think it is important to talk about the power of function composition and couple of
+ * things special about `startHTTPServer` and `route`:
  *
- * Before jumping into an example, you need to keep in mind two concepts:
- *
- *   1. The function `startHTTPServer` takes a unary function that must return a `Task` of `Response`.
- *   2. The function `route`, will always return early if the argument is not a `Request`.
+ * 1. The function `startHTTPServer` takes a unary function that must return a `Task` of `Response`.
+ * 2. The function `route`, will always return early if the argument is not a `Request`.
  *
  * So for example, if you needed to discard any request with a content type that is not `application/json`, you could
  * do the following.

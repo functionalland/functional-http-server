@@ -1,6 +1,6 @@
 # Functional HTTP server
 
-Common Functional Programming Algebraic data types for JavaScript that is compatible with most modern browsers and Deno.
+A simple HTTP server inspired by Express and in tune with Functional Programming principles in JavaScript for Deno.  
 
 [![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://github.com/sebastienfilion/functional-http-server@v0.1.1)
 [![deno version](https://img.shields.io/badge/deno-^1.4.6-lightgrey?logo=deno)](https://github.com/denoland/deno)
@@ -75,7 +75,7 @@ startHTTPServer(
   { port: 8080 },
   route(
     handlers.get('/', _ => Task.of(Response.OK({ 'content-type': 'text/plain' }, encodeText("Hello, Hoge!"))))
-  );
+  )
 );
 ```
 
@@ -93,7 +93,7 @@ import { explodeRequest } from "https://deno.land/x/functional_http_server@v0.1.
 startHTTPServer(
   { port: 8080 },
   route(
-    handlers.get('/users', explodeRequest(({ filters }) => retrieveUsers(filters))),
+    handlers.get('/users', explodeRequest(({ status }) => retrieveUsers({ filters: { status } }))),
     handlers.post(/\/users\/(?<userID>.+)$/, explodeRequest(({ userID }, { data: user }) => updateUser(userID, user)))
   )
 );
@@ -102,7 +102,7 @@ startHTTPServer(
 For this sample, a `GET` request made with a query string will be parsed as an object.
 
 ```bash
-$ curl localhost:8080/users?filters[status]=active
+$ curl localhost:8080/users?status=active
 ```
 
 And, a `POST` request with a body as JSON will be parsed as well.

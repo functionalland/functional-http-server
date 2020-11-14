@@ -95,11 +95,3 @@ export const explodeRequest = parseRequest([ parseMeta, parseBody ]);
 // factorizeMiddleware :: (Request -> Task a) -> (Request -> a -> Task Response) -> Request -> Task Response
 export const factorizeMiddleware = middlewareFunction => handlerFunction =>
     request => middlewareFunction(request).chain(options => handlerFunction(options, request));
-
-// authorize :: (Request -> Task a) -> (a -> Task Response) -> Task Response
-export const authorizeRequest = authorizationFunction => factorizeMiddleware(
-  compose(
-    // Note: Need to implement `alt` for Task :thinking:
-    authorizationFunction
-  )
-);
