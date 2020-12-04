@@ -11,11 +11,11 @@ import {
   prop,
   test
 } from "https://x.nest.land/ramda@0.27.0/source/index.js";
-import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
-import Request from "https://deno.land/x/functional_io@v0.5.0/library/Request.js";
-import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
+import Task from "https://deno.land/x/functional@v1.2.1/library/Task.js";
+import Request from "https://deno.land/x/functional_io@v1.0.0/library/Request.js";
+import Response from "https://deno.land/x/functional_io@v1.0.0/library/Response.js";
 
-import { assertIsRegex } from "https://deno.land/x/functional@v1.1.0/library/utilities.js";
+import { assertIsRegex } from "https://deno.land/x/functional@v1.2.1/library/utilities.js";
 
 /**
  * ## Routing
@@ -27,8 +27,8 @@ import { assertIsRegex } from "https://deno.land/x/functional@v1.1.0/library/uti
  * must return a `Task` of a `Response`.
  *
  * ```js
- * import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
- * import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
+ * import Task from "https://deno.land/x/functional@v1.2.1/library/Task.js";
+ * import Response from "https://deno.land/x/functional_io@v1.0.0/library/Response.js";
  * import { route } from "./library/route.js";
  * import { encodeText } from "./library/utilities.js";
  *
@@ -49,8 +49,8 @@ import { assertIsRegex } from "https://deno.land/x/functional@v1.1.0/library/uti
  * the assertion function. Each handler takes a `String` or a `RegExp` and a unary function.
  *
  * ```js
- * import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
- * import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
+ * import Task from "https://deno.land/x/functional@v1.2.1/library/Task.js";
+ * import Response from "https://deno.land/x/functional_io@v1.0.0/library/Response.js";
  * import { handlers, route } from "./library/route.js";
  * import { encodeText } from "./library/utilities.js";
  *

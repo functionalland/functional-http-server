@@ -1,7 +1,6 @@
 import {
   always,
   ap,
-  chain,
   compose,
   cond,
   converge,
@@ -16,8 +15,7 @@ import {
   split,
   test
 } from "https://x.nest.land/ramda@0.27.0/source/index.js";
-import { assertIsRegex, decodeRaw, encodeText, log } from "https://deno.land/x/functional@v1.1.0/library/utilities.js";
-import Request from "https://deno.land/x/functional_io@v0.5.0/library/Request.js";
+import { assertIsRegex, decodeRaw } from "https://deno.land/x/functional@v1.2.1/library/utilities.js";
 
 /**
  * ### Parsing Requests
