@@ -1,8 +1,8 @@
-# Functional HTTP server
+<img src="./.github/fl-word_art-http_server-reverse.svg" alt="Functional Core" width="450" />
 
 A simple HTTP server inspired by Express and in tune with Functional Programming principles in JavaScript for Deno.  
 
-[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://github.com/sebastienfilion/functional-http-server@v0.1.1)
+[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://github.com/sebastienfilion/functional-http-server@v0.3.0)
 [![deno version](https://img.shields.io/badge/deno-^1.4.6-lightgrey?logo=deno)](https://github.com/denoland/deno)
 [![GitHub release](https://img.shields.io/github/v/release/sebastienfilion/functional)](https://github.com/sebastienfilion/functional-http-server/releases)
 [![GitHub licence](https://img.shields.io/github/license/sebastienfilion/functional)](https://github.com/sebastienfilion/functional-http-server/blob/v0.1.1/LICENSE)
@@ -17,9 +17,9 @@ The function takes two arguments; the first argument is the options, and the sec
 function that takes a `Request` and return a `Task` of a `Response`.
 
 ```js
-import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
-import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
-import startHTTPServer from "https://deno.land/x/functional_http_server@v0.1.0/library/server.js";
+import Task from "https://deno.land/x/functional@v1.2.1/library/Task.js";
+import Response from "https://deno.land/x/functional_io@v1.0.0/library/Response.js";
+import startHTTPServer from "https://deno.land/x/functional_http_server@v0.3.0/library/server.js";
 
 startHTTPServer({ port: 8080 }, request => Task.of(Response.OK({}, request.raw)));
 ```
@@ -44,10 +44,10 @@ The assertion function takes a `Request` and return a `Boolean`, the handling fu
 must return a `Task` of a `Response`.
 
 ```js
-import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
-import { encodeText } from "https://deno.land/x/functional@v1.1.0/library/utilities.js";
-import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
-import { route } from "https://deno.land/x/functional_http_server@v0.1.0/library/route.js";
+import Task from "https://deno.land/x/functional@v1.2.1/library/Task.js";
+import { encodeText } from "https://deno.land/x/functional@v1.2.1/library/utilities.js";
+import Response from "https://deno.land/x/functional_io@v1.0.0/library/Response.js";
+import { route } from "https://deno.land/x/functional_http_server@v0.3.0/library/route.js";
 
 startHTTPServer(
   { port: 8080 },
@@ -66,10 +66,10 @@ Because the pattern is common, this library also offers a collection of handler 
 the assertion function. Each handler takes a `String` or a `RegExp` and a unary function.
 
 ```js
-import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
-import { encodeText } from "https://deno.land/x/functional@v1.1.0/library/utilities.js";
-import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
-import { handlers, route } from "https://deno.land/x/functional_http_server@v0.1.0/library/route.js";
+import Task from "https://deno.land/x/functional@v1.2.1/library/Task.js";
+import { encodeText } from "https://deno.land/x/functional@v1.2.1/library/utilities.js";
+import Response from "https://deno.land/x/functional_io@v1.0.0/library/Response.js";
+import { handlers, route } from "https://deno.land/x/functional_http_server@v0.3.0/library/route.js";
 
 startHTTPServer(
   { port: 8080 },
@@ -88,7 +88,7 @@ The binary function handler will be called with an object containing the origina
 and other parameters; the second argument is the body of request serialized based on the content type.
 
 ```js
-import { explodeRequest } from "https://deno.land/x/functional_http_server@v0.1.0/library/utilities.js";
+import { explodeRequest } from "https://deno.land/x/functional_http_server@v0.3.0/library/utilities.js";
 
 startHTTPServer(
   { port: 8080 },

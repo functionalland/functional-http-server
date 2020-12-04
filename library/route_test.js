@@ -1,7 +1,7 @@
-import { assert, assertEquals } from "https://deno.land/std@0.70.0/testing/asserts.ts"
-import Task from "https://deno.land/x/functional@v1.1.0/library/Task.js";
-import Request from "https://deno.land/x/functional_io@v0.5.0/library/Request.js";
-import Response from "https://deno.land/x/functional_io@v0.5.0/library/Response.js";
+import { assert, assertEquals } from "https://deno.land/std@0.79.0/testing/asserts.ts"
+import Task from "https://deno.land/x/functional@v1.2.1/library/Task.js";
+import Request from "https://deno.land/x/functional_io@v1.0.0/library/Request.js";
+import Response from "https://deno.land/x/functional_io@v1.0.0/library/Response.js";
 
 import { handlers, route } from "./route.js";
 
