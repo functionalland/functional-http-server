@@ -4,8 +4,8 @@ Functional HTTP Server is optimized to write elegant and powerful point-free fun
 library - for simplification - but you should be able to use any library that implements the Fantasy-land 
 specifications.
 
-This example showcase how to create an endpoint handler for `POST /hoge` that writes to a local file and to Redis 
-simultaneously the content of the request's body and, replies with `201`.
+This example showcases how to create an endpoint handler for POST /hoge that writes the content of the request's 
+body to a local file and to Redis simultaneously and, replies with 201.
 
 ```js
 import Task from "https://deno.land/x/functional@v1.3.2/library/Task.js";
