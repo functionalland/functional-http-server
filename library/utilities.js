@@ -14,15 +14,33 @@ import {
   prop,
   split,
   test
-} from "https://x.nest.land/ramda@0.27.0/source/index.js";
-import { assertIsRegex, decodeRaw } from "https://deno.land/x/functional@v1.2.1/library/utilities.js";
+} from "https://deno.land/x/ramda@v0.27.2/mod.ts";
+import { assertIsRegex, decodeRaw } from "https://deno.land/x/functional@v1.3.2/library/utilities.js";
 
 /**
- * ### Parsing Requests
+ * ## Utilities
  */
 
-// parseBody :: Options -> Request -> a
-export const parseBody = _ => ap(
+/**
+ * ### `parseBody`
+ * `Request -> a`
+ *
+ * This function takes a `Request` and return the most appropriate parsing of the body;
+ * an object if the content-type of the request is `application/json` or, a string if the content type of the request is
+ * `text/*`.
+ *
+ * ```js
+ * import { parseBody } from "https://deno.land/x/functional_http_server@v0.3.1/library/utilities.js";
+ *
+ * assertEquals(
+ *   parseBody(
+ *     Request({ 'content-type': 'application/json' }, encodeText(JSON.stringify({ piyo: 'piyo' })))
+ *   ),
+ *   { piyo: 'piyo' }
+ * );
+ * ```
+ */
+export const parseBody = ap(
   curry((request, parse) =>
     request.raw.length > 0 ? parse(request.raw) : {}),
   cond([
@@ -35,7 +53,7 @@ export const parseBody = _ => ap(
     ],
     [
       compose(
-        test(/text\/plain/),
+        test(/text\/.*/),
         path([ 'headers', 'content-type' ])
       ),
       always(decodeRaw)
@@ -47,7 +65,21 @@ export const parseBody = _ => ap(
   ])
 );
 
-// parseQueryString :: Request -> { k: string }
+/**
+ * ### `parseQueryString`
+ * `Request -> Record`
+ *
+ * This function takes a `Request` and return an record of the query string.
+ *
+ * ```js
+ * import { parseQueryString } from "https://deno.land/x/functional_http_server@v0.3.1/library/utilities.js";
+ *
+ * assertEquals(
+ *   parseQueryString(Request({ url: '/?hoge=hoge' }, new Uint8Array([]))),
+ *   { hoge: 'hoge' }
+ * );
+ * ```
+ */
 export const parseQueryString = ifElse(
   test(/\?/),
   compose(
@@ -88,7 +120,7 @@ export const parseRequest = parsers => curry(
 );
 
 // explodeRequest :: ({ k: string }, a) -> Task Response) -> Options -> Request -> Task Response
-export const explodeRequest = parseRequest([ parseMeta, parseBody ]);
+export const explodeRequest = parseRequest([ parseMeta, _ => parseBody ]);
 
 // factorizeMiddleware :: (Request -> Task a) -> (Request -> a -> Task Response) -> Request -> Task Response
 export const factorizeMiddleware = middlewareFunction => handlerFunction =>

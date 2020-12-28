@@ -1,10 +1,10 @@
 import { assert, assertEquals } from "https://deno.land/std@0.79.0/testing/asserts.ts"
-import { curry } from "https://x.nest.land/ramda@0.27.0/source/index.js";
+import { curry } from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 
-import Request from "https://deno.land/x/functional_io@v1.0.0/library/Request.js";
-import Response from "https://deno.land/x/functional_io@v1.0.0/library/Response.js";
-import Task from "https://deno.land/x/functional@v1.2.1/library/Task.js";
-import { decodeRaw, encodeText, safeExtract } from "https://deno.land/x/functional@v1.2.1/library/utilities.js";
+import Request from "https://deno.land/x/functional_io@v1.1.0/library/Request.js";
+import Response from "https://deno.land/x/functional_io@v1.1.0/library/Response.js";
+import Task from "https://deno.land/x/functional@v1.3.2/library/Task.js";
+import { decodeRaw, encodeText, safeExtract } from "https://deno.land/x/functional@v1.3.2/library/utilities.js";
 
 import {
   explodeRequest,
@@ -108,12 +108,12 @@ Deno.test(
   "parseBody",
   () => {
     assertEquals(
-      parseBody({})(Request({}, new Uint8Array([]))),
+      parseBody(Request({}, new Uint8Array([]))),
       {}
     );
 
     assertEquals(
-      parseBody({})(
+      parseBody(
         Request({ 'content-type': 'application/json' }, encodeText(JSON.stringify({ piyo: 'piyo' })))
       ),
       { piyo: 'piyo' }
